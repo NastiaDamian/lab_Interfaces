@@ -1,0 +1,126 @@
+using System;
+//ЗАВДАННЯ 1.1.
+// Інтерфейс для транспортного засобу
+public interface IVehicle
+{
+    void Start();  // Метод для запуску транспортного засобу
+    void Stop();   // Метод для зупинки транспортного засобу
+    void Drive();  // Метод для руху транспортного засобу
+}
+
+// Клас для автомобіля, який реалізує інтерфейс IVehicle
+public class Car : IVehicle
+{
+    public string Model { get; set; }
+
+    // Реалізація методів з інтерфейсу
+    public void Start()
+    {
+        Console.WriteLine($"Car {Model} started.");
+    }
+
+    public void Stop()
+    {
+        Console.WriteLine($"Car {Model} stopped.");
+    }
+
+    public void Drive()
+    {
+        Console.WriteLine($"Car {Model} is driving.");
+    }
+
+    // Власні властивості та методи для автомобіля
+    public int NumberOfDoors { get; set; }
+
+    public void Honk()
+    {
+        Console.WriteLine($"Car {Model} is honking.");
+    }
+}
+
+// Клас для мотоцикла, який реалізує інтерфейс IVehicle
+public class Motorcycle : IVehicle
+{
+    public string Brand { get; set; }
+
+    // Реалізація методів з інтерфейсу
+    public void Start()
+    {
+        Console.WriteLine($"Motorcycle {Brand} started.");
+    }
+
+    public void Stop()
+    {
+        Console.WriteLine($"Motorcycle {Brand} stopped.");
+    }
+
+    public void Drive()
+    {
+        Console.WriteLine($"Motorcycle {Brand} is riding.");
+    }
+
+    // Власні властивості та методи для мотоцикла
+    public bool HasHelmetCompartment { get; set; }
+
+    public void Wheelie()
+    {
+        Console.WriteLine($"Motorcycle {Brand} is doing a wheelie.");
+    }
+}
+
+// Клас для вантажівки, який реалізує інтерфейс IVehicle
+public class Truck : IVehicle
+{
+    public string Manufacturer { get; set; }
+
+    // Реалізація методів з інтерфейсу
+    public void Start()
+    {
+        Console.WriteLine($"Truck {Manufacturer} started.");
+    }
+
+    public void Stop()
+    {
+        Console.WriteLine($"Truck {Manufacturer} stopped.");
+    }
+
+    public void Drive()
+    {
+        Console.WriteLine($"Truck {Manufacturer} is moving.");
+    }
+
+    // Власні властивості та методи для вантажівки
+    public double CargoCapacity { get; set; }
+
+    public void LoadCargo()
+    {
+        Console.WriteLine($"Truck {Manufacturer} is loading cargo.");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        // Тестування різних транспортних засобів
+        Car car = new Car { Model = "Sedan", NumberOfDoors = 4 };
+        Motorcycle motorcycle = new Motorcycle { Brand = "Harley Davidson", HasHelmetCompartment = true };
+        Truck truck = new Truck { Manufacturer = "Volvo", CargoCapacity = 5000 };
+
+        // Виклик методів з інтерфейсу для кожного транспортного засобу
+        car.Start();
+        car.Drive();
+        car.Stop();
+        car.Honk();
+
+        motorcycle.Start();
+        motorcycle.Drive();
+        motorcycle.Stop();
+        motorcycle.Wheelie();
+
+        truck.Start();
+        truck.Drive();
+        truck.Stop();
+        truck.LoadCargo();
+    }
+}
