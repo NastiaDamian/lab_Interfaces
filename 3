@@ -1,0 +1,86 @@
+using System;
+//ЗАВДАННЯ 3
+
+// Інтерфейс для виведення інформації про продукт
+public interface IProduct
+{
+    void DisplayInfo();
+}
+
+// Інтерфейс для додавання продукту до кошика покупок
+public interface IShoppable
+{
+    void AddToCart();
+}
+
+// Базовий клас ElectronicDevice, який реалізує інтерфейс IProduct
+public class ElectronicDevice : IProduct
+{
+    // Властивості базового класу
+    public string Name { get; set; }
+    public string Manufacturer { get; set; }
+    public double Price { get; set; }
+
+    // Реалізація методу з інтерфейсу IProduct
+    public void DisplayInfo()
+    {
+        Console.WriteLine($"Device: {Name}, Manufacturer: {Manufacturer}, Price: {Price:C}");
+    }
+}
+
+// Клас Smartphone, який успадковує ElectronicDevice та реалізує IShoppable
+public class Smartphone : ElectronicDevice, IShoppable
+{
+    // Унікальні властивості класу Smartphone
+    public string OperatingSystem { get; set; }
+
+    // Реалізація методу з інтерфейсу IShoppable
+    public void AddToCart()
+    {
+        Console.WriteLine($"Smartphone {Name} added to the shopping cart.");
+    }
+}
+
+// Клас Laptop, який успадковує ElectronicDevice та реалізує IShoppable
+public class Laptop : ElectronicDevice, IShoppable
+{
+    // Унікальні властивості класу Laptop
+    public string Processor { get; set; }
+
+    // Реалізація методу з інтерфейсу IShoppable
+    public void AddToCart()
+    {
+        Console.WriteLine($"Laptop {Name} added to the shopping cart.");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        // Тестування класів та інтерфейсів
+        Smartphone smartphone = new Smartphone
+        {
+            Name = "iPhone 13",
+            Manufacturer = "Apple",
+            Price = 999.99,
+            OperatingSystem = "iOS"
+        };
+
+        Laptop laptop = new Laptop
+        {
+            Name = "Dell XPS 15",
+            Manufacturer = "Dell",
+            Price = 1499.99,
+            Processor = "Intel Core i7"
+        };
+
+        // Виведення інформації про продукти
+        smartphone.DisplayInfo();
+        laptop.DisplayInfo();
+
+        // Додавання продуктів до кошика покупок
+        smartphone.AddToCart();
+        laptop.AddToCart();
+    }
+}
