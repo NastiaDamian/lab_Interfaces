@@ -1,0 +1,91 @@
+using System;
+//ЗАВДАННЯ 2.1
+
+// Інтерфейс для виведення інформації про об'єкт на екран
+public interface IPrintable
+{
+    void Print();
+}
+
+// Інтерфейс для керування взяттям та поверненням книги
+public interface IBorrowable
+{
+    void BorrowItem();
+    void ReturnItem();
+    bool IsAvailable();
+}
+
+// Клас для представлення книги, який реалізує інтерфейси IPrintable та IBorrowable
+public class Book : IPrintable, IBorrowable
+{
+    // Властивості книги
+    public string Title { get; set; }
+    public string Author { get; set; }
+    public int YearPublished { get; set; }
+
+    // Статус доступності книги
+    private bool isAvailable = true;
+
+    // Реалізація методів з інтерфейсу IPrintable
+    public void Print()
+    {
+        Console.WriteLine($"Book: {Title}, Author: {Author}, Year Published: {YearPublished}");
+    }
+
+    // Реалізація методів з інтерфейсу IBorrowable
+    public void BorrowItem()
+    {
+        if (isAvailable)
+        {
+            Console.WriteLine($"Book {Title} is borrowed.");
+            isAvailable = false;
+        }
+        else
+        {
+            Console.WriteLine($"Book {Title} is not available for borrowing.");
+        }
+    }
+
+    public void ReturnItem()
+    {
+        Console.WriteLine($"Book {Title} is returned to the library.");
+        isAvailable = true;
+    }
+
+    public bool IsAvailable()
+    {
+        return isAvailable;
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        // Тестування керування бібліотекою книг
+        Book book1 = new Book { Title = "The Catcher in the Rye", Author = "J.D. Salinger", YearPublished = 1951 };
+        Book book2 = new Book { Title = "To Kill a Mockingbird", Author = "Harper Lee", YearPublished = 1960 };
+
+        // Виведення інформації про книги
+        book1.Print();
+        book2.Print();
+
+        // Тестування взяття та повернення книги
+        Console.WriteLine("\nTesting Borrowing and Returning:");
+        book1.BorrowItem();
+        book2.BorrowItem();
+
+        // Перевірка доступності книг після взяття
+        Console.WriteLine($"\nIs {book1.Title} available? {book1.IsAvailable()}");
+        Console.WriteLine($"Is {book2.Title} available? {book2.IsAvailable()}");
+
+        // Повернення книг у бібліотеку
+        book1.ReturnItem();
+        book2.ReturnItem();
+
+        // Перевірка доступності книг після повернення
+        Console.WriteLine($"\nIs {book1.Title} available? {book1.IsAvailable()}");
+        Console.WriteLine($"Is {book2.Title} available? {book2.IsAvailable()}");
+    }
+}
+
